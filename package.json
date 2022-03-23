@@ -1,0 +1,9 @@
+{
+  "devDependencies": {
+    "sass": "^1.44.0",
+    "vite": "^2.6.14"
+  },
+  "dependencies": {
+    "lodash": "^4.17.21"
+  }
+}
