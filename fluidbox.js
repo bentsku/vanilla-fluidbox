@@ -366,8 +366,8 @@ export const createFluidBox = (element, options) => {
     const imgStyle = fluidBoxThumb.style
 
     fluidBoxGhost.style.transform = 'translate(0,0) scale(1,1)'
-    fluidBoxGhost.style.top = imgTop - wrapTop + parseInt(imgStyle.borderTopWidth) + parseInt(imgStyle.paddingTop)
-    fluidBoxGhost.style.left = imgLeft - wrapLeft + parseInt(imgStyle.borderLeftWidth) + parseInt(imgStyle.paddingLeft)
+    fluidBoxGhost.style.top = `${imgTop - wrapTop + parseInt(imgStyle.borderTopWidth || 0) + parseInt(imgStyle.paddingTop || 0)}`
+    fluidBoxGhost.style.left = `${imgLeft - wrapLeft + parseInt(imgStyle.borderLeftWidth || 0) + parseInt(imgStyle.paddingLeft || 0)}`
 
     if (fluidBoxLoader) {
       fluidBoxLoader.style.transform = 'none'
@@ -444,7 +444,7 @@ export const createFluidBox = (element, options) => {
   }
 
   init()
-  compute()
+  reposition()
 
   return {
     open,
