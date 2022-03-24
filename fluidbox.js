@@ -137,8 +137,8 @@ export const createFluidBox = (element, options) => {
       const { top: imgTop, left: imgLeft } = elementPosition(fluidBoxThumb)
       const { top: wrapTop, left: wrapLeft } = elementPosition(fluidBoxWrapper)
       const imgStyle = fluidBoxThumb.style
-      fluidBoxGhost.style.top = imgTop - wrapTop + parseInt(imgStyle.borderTopWidth) + parseInt(imgStyle.paddingTop)
-      fluidBoxGhost.style.left = imgLeft - wrapLeft + parseInt(imgStyle.borderLeftWidth) + parseInt(imgStyle.paddingLeft)
+      fluidBoxGhost.style.top = `${imgTop - wrapTop + parseInt(imgStyle.borderTopWidth) + parseInt(imgStyle.paddingTop)}px`
+      fluidBoxGhost.style.left = `${imgLeft - wrapLeft + parseInt(imgStyle.borderLeftWidth) + parseInt(imgStyle.paddingLeft)}px`
     }
   }
 
@@ -333,8 +333,8 @@ export const createFluidBox = (element, options) => {
     const { top: wrapTop, left: wrapLeft } = elementPosition(fluidBoxWrapper)
     const transformStyleString = `translate(${parseInt(offsetX * 100) / 100}px,${parseInt(offsetY * 100) / 100}px) scale(${scale})`
     fluidBoxGhost.style.transform = transformStyleString
-    fluidBoxGhost.style.top = top - wrapTop
-    fluidBoxGhost.style.left = left - wrapLeft
+    fluidBoxGhost.style.top = `${top - wrapTop}px`
+    fluidBoxGhost.style.left = `${left - wrapLeft}px`
 
     if (fluidBoxLoader) {
       fluidBoxLoader.style.transform = transformStyleString
