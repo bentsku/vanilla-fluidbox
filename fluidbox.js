@@ -125,10 +125,6 @@ export const createFluidBox = (element, options) => {
       }
     },
     fluidboxElements: () => {
-      // TODO SAVE REFS TO THEM AT CREATION!! NO LOOKUP!!
-      // const fluidBoxThumb = element.querySelector('img')
-      // const fluidBoxGhost = element.querySelector('.fluidbox__ghost')
-      // const fluidBoxWrapper = element.querySelector('.fluidbox__wrap')
       instanceData.thumb = {
         natW: fluidBoxThumb.naturalWidth,
         natH: fluidBoxThumb.naturalHeight,
@@ -156,7 +152,6 @@ export const createFluidBox = (element, options) => {
   // +-- The only child is an image element OR a picture element
   // +-- The element must not be hidden (itself or its parents)
   const init = () => {
-    // TODO SAVE REFS TO THEM AT CREATION!! NO LOOKUP!!
     fluidBoxThumb = element.querySelector('img')
     measure.viewport()
     if (
@@ -206,10 +201,6 @@ export const createFluidBox = (element, options) => {
   }
 
   function hideFluidbox () {
-    // TODO SAVE REFS TO THEM AT CREATION!! NO LOOKUP!!
-    // const fluidBoxThumb = element.querySelector('img')
-    // const fluidBoxGhost = element.querySelector('.fluidbox__ghost')
-    // const fluidBoxWrapper = element.querySelector('.fluidbox__wrap')
     const fluidboxOverlay = element.querySelector('.fluidbox__overlay')
     fluidBoxGhost.style.opacity = 0
     fluidBoxThumb.style.opacity = 1
@@ -219,13 +210,8 @@ export const createFluidBox = (element, options) => {
 
 
   const open = () => {
-    // TODO SAVE REFS TO THEM AT CREATION!! NO LOOKUP!!
-    // const fluidBoxThumb = element.querySelector('img')
-    // const fluidBoxGhost = element.querySelector('.fluidbox__ghost')
-    // const fluidBoxWrapper = element.querySelector('.fluidbox__wrap')
 
     instanceData.state = 1
-    console.log('state', instanceData.state)
     fluidBoxGhost.removeEventListener('transitionend', hideFluidbox)
 
     document.querySelectorAll('.fluidbox--opened').forEach(elmt => {
@@ -244,7 +230,6 @@ export const createFluidBox = (element, options) => {
     element.classList.add('fluidbox--loading')
 
     if (checkURL(fluidBoxThumb.src)) {
-      console.log('error here?')
       close()
       return false
     }
@@ -253,7 +238,6 @@ export const createFluidBox = (element, options) => {
     fluidBoxGhost.style.opacity = 1
 
     measure.fluidboxElements()
-    console.log('opening here first just after fluidboxElements()')
 
     if (settings.immediateOpen) {
       element.classList.add('fluidbox--opened', 'fluidbox--loaded')
@@ -285,7 +269,6 @@ export const createFluidBox = (element, options) => {
       img.src = element.getAttribute('href')
 
     } else {
-      console.log('opening here')
       img = new Image()
       img.onload = function () {
         element.classList.remove('fluidbox--loading')
@@ -307,16 +290,9 @@ export const createFluidBox = (element, options) => {
       }
       img.src = element.getAttribute('href')
     }
-
-
   }
 
   const compute = () => {
-    // TODO SAVE REFS TO THEM AT CREATION!! NO LOOKUP!!
-    // const fluidBoxThumb = element.querySelector('img')
-    // const fluidBoxGhost = element.querySelector('.fluidbox__ghost')
-    // const fluidBoxWrapper = element.querySelector('.fluidbox__wrap')
-
     let { natW, natH, w, h } = instanceData.thumb
     const thumbRatio = natW / natH
     const viewportRatio = globalData.viewport.w / globalData.viewport.h
@@ -366,11 +342,6 @@ export const createFluidBox = (element, options) => {
   }
 
   const close = (d) => {
-    console.log('close called??')
-    // TODO SAVE REFS TO THEM AT CREATION!! NO LOOKUP!!
-    // const fluidBoxThumb = element.querySelector('img')
-    // const fluidBoxGhost = element.querySelector('.fluidbox__ghost')
-    // const fluidBoxWrapper = element.querySelector('.fluidbox__wrap')
     const fluidboxOverlay = element.querySelector('.fluidbox__overlay')
 
     const closeData = Object.assign({}, { error: false }, d)
@@ -383,7 +354,7 @@ export const createFluidBox = (element, options) => {
 
     const rmClass = []
     element.classList.forEach((value) => {
-      console.log(value, value.match(/(^|\s)fluidbox--(opened|loaded|loading)+/g))
+      // console.log(value, value.match(/(^|\s)fluidbox--(opened|loaded|loading)+/g))
       if (value.match(/(^|\s)fluidbox--(opened|loaded|loading)+/g)) {
         rmClass.push(value)
       }
@@ -403,11 +374,9 @@ export const createFluidBox = (element, options) => {
     }
 
     if (closeData.error) {
-      console.log('closeData error??')
       hideFluidbox()
       return
     } else {
-      console.log('add event listener once')
       fluidBoxGhost.addEventListener('transitionend', hideFluidbox, { once: true })
     }
 
@@ -425,7 +394,6 @@ export const createFluidBox = (element, options) => {
   }
 
   function onKeydown (e) {
-    console.log('keydown??', e, e.key)
     if (e.key === 'Escape') {
       close()
     }
@@ -476,6 +444,7 @@ export const createFluidBox = (element, options) => {
   }
 
   init()
+  compute()
 
   return {
     open,
